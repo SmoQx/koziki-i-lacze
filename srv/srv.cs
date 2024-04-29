@@ -51,7 +51,7 @@ class Program
         try{
         // Read JSON data from the client
             string jsonData = await reader.ReadToEndAsync();
-            Console.WriteLine();
+            Console.WriteLine(jsonData);
             // Deserialize JSON data
             var request = Newtonsoft.Json.JsonConvert.DeserializeObject<JsonRequest>(jsonData);
             Console.WriteLine(request);
