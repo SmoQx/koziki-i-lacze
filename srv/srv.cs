@@ -42,37 +42,6 @@ class Program
         }
     }
 
-//    static void HandleClient(TcpClient client)
-//    {
-//        // Get the client's IP address and port number
-//        IPEndPoint clientEndPoint = (IPEndPoint)client.Client.RemoteEndPoint;
-//        Console.WriteLine($"Client IP address: {clientEndPoint.Address}, Port: {clientEndPoint.Port}");
-//
-//        // Get the client's network stream
-//        NetworkStream stream = client.GetStream();
-//
-//        // Read data from the client
-//        byte[] buffer = new byte[1024];
-//        inxt bytesRead;
-//        StringBuilder data = new StringBuilder();
-////        while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
-////        {
-////            // Convert the bytes to a string and append to the data StringBuilder
-////            data.Append(Encoding.ASCII.GetString(buffer, 0, bytesRead));
-////        }
-//
-//        // Display the received data
-//        Console.WriteLine($"Received data from client: {data}");
-//
-//        // Send a response to the client
-//        string response = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nHello, client!";
-//        byte[] responseBuffer = Encoding.ASCII.GetBytes(response);
-//        stream.Write(responseBuffer, 0, responseBuffer.Length);
-//
-//        // Close the connection
-//        client.Close();
-//        Console.WriteLine("Client disconnected.");
-//    }
 
     static async Task HandleClientAsync(TcpClient client)
     {
