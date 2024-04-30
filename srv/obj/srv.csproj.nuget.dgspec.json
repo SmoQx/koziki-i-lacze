@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/mnt/e/kozaki_i_laczki/kozaki_i_laczki.csproj": {}
+    "/home/smoq/Pulpit/koziki_i_lacze/koziki-i-lacze/srv/srv.csproj": {}
   },
   "projects": {
-    "/mnt/e/kozaki_i_laczki/kozaki_i_laczki.csproj": {
+    "/home/smoq/Pulpit/koziki_i_lacze/koziki-i-lacze/srv/srv.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/e/kozaki_i_laczki/kozaki_i_laczki.csproj",
-        "projectName": "kozaki_i_laczki",
-        "projectPath": "/mnt/e/kozaki_i_laczki/kozaki_i_laczki.csproj",
+        "projectUniqueName": "/home/smoq/Pulpit/koziki_i_lacze/koziki-i-lacze/srv/srv.csproj",
+        "projectName": "srv",
+        "projectPath": "/home/smoq/Pulpit/koziki_i_lacze/koziki-i-lacze/srv/srv.csproj",
         "packagesPath": "/home/smoq/.nuget/packages/",
-        "outputPath": "/mnt/e/kozaki_i_laczki/obj/",
+        "outputPath": "/home/smoq/Pulpit/koziki_i_lacze/koziki-i-lacze/srv/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/smoq/.nuget/NuGet/NuGet.Config"
@@ -32,11 +32,22 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.WebSockets": {
+              "target": "Package",
+              "version": "[2.2.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -49,11 +60,14 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
