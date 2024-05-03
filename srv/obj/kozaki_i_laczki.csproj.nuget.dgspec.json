@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/mnt/e/kozaki_i_laczki/kozaki_i_laczki.csproj": {}
+    "/mnt/e/kozaki_i_laczki/srv/kozaki_i_laczki.csproj": {}
   },
   "projects": {
-    "/mnt/e/kozaki_i_laczki/kozaki_i_laczki.csproj": {
+    "/mnt/e/kozaki_i_laczki/srv/kozaki_i_laczki.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/e/kozaki_i_laczki/kozaki_i_laczki.csproj",
+        "projectUniqueName": "/mnt/e/kozaki_i_laczki/srv/kozaki_i_laczki.csproj",
         "projectName": "kozaki_i_laczki",
-        "projectPath": "/mnt/e/kozaki_i_laczki/kozaki_i_laczki.csproj",
-        "packagesPath": "/home/smoq/.nuget/packages/",
-        "outputPath": "/mnt/e/kozaki_i_laczki/obj/",
+        "projectPath": "/mnt/e/kozaki_i_laczki/srv/kozaki_i_laczki.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/mnt/e/kozaki_i_laczki/srv/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/smoq/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -37,6 +37,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
