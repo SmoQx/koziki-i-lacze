@@ -25,14 +25,6 @@ public class Add_player
             };
             connection.Insert(user);
 
-            // Retrieve all data from the UserData table
-            var allUsers = connection.Table<UserData>().ToList();
-            foreach (var u in allUsers)
-            {
-                Console.WriteLine($"ID: {u.Id}, Nickname: {u.Nickname}, Level: {u.Level}, Items: {u.ItemsList}, HP: {u.HP}, Mana: {u.Mana}, Skills: {u.Skills}");
-            }
-
-            // Drop the UserData table (for cleanup, you may omit this)
         }
     }
 }

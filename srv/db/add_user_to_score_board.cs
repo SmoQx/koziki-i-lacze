@@ -26,15 +26,6 @@ public class Add_user_to_score_board
             };
             connection.Insert(player);
 
-            // Retrieve all data from the PlayerData table
-            var allPlayers = connection.Table<PlayerData>().ToList();
-            foreach (var p in allPlayers)
-            {
-                Console.WriteLine($"ID: {p.Id}, Pozycja: {p.Pozycja}, Nick: {p.Nick}, Poziom doświadczenia: {p.PoziomDoswiadczenia}, Zwycięstwa: {p.Zwyciestwa}, Porażki: {p.Porazki}, Ratio: {p.Ratio}, Czas gry: {p.CzasGry}");
-            }
-
-            // Delete the PlayerData table
-//            connection.DropTable<PlayerData>();
         }
     }
 }

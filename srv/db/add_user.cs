@@ -21,14 +21,6 @@ public class Add_User
             };
             connection.Insert(user);
 
-            // Retrieve all data from the UserData table
-            var allUsers = connection.Table<User_credentials>().ToList();
-            foreach (var u in allUsers)
-            {
-                Console.WriteLine($"user name: {u.UserName}, password: {u.PasswordHash}");
-            }
-
-            // Drop the UserData table (for cleanup, you may omit this)
         }
     }
 }
