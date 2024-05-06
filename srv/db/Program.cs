@@ -4,5 +4,6 @@ class Program
     {
         Add_user_to_score_board.add_user_to_score_board();
         Add_User.add_user();
+        Add_player.add_player();
     }
 }
