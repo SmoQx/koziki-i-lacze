@@ -13,8 +13,8 @@ class Program
         };
         var user = new User_credentials
         {
-            UserName = "asdfusrsdf",
-            PasswordHash = "asdpaasdfssword"
+            UserName = Hashing.ComputeSHA256Hash("asdfusrsdf"),
+            PasswordHash = Hashing.ComputeSHA256Hash("asdpaasdfssword")
         };
         var player = new PlayerData
         {
