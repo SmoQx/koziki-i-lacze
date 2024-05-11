@@ -1,0 +1,50 @@
+using System;
+using Newtonsoft.Json.Linq;
+using DB.handlers;
+
+public class MessageHandler
+{
+    public static string HandleMessage(string jsonMessage)
+    {
+        try
+        {
+            // Parse the JSON message
+            JObject messageObject = JObject.Parse(jsonMessage);
+
+            // Extract method and message from JSON
+            string method = messageObject["method"]?.ToString();
+            string message = messageObject["message"]?.ToString();
+            // Determine response based on the method and message
+            if (method == "greet")
+            {
+                return Greet(message);
+            }
+            else if (method == "echo")
+            {
+                return Echo(message);
+            }
+            else if (method == "GET" && message == "user_table")
+            {
+                return DB.handlers.Readers.read_scoreboard("../db/MyDatabase.db");
+            }
+            else
+            {
+                return "Unknown method.";
+            }
+        }
+        catch (Exception ex)
+        {
+            return $"Error handling message: {ex.Message}";
+        }
+    }
+
+    private static string Greet(string name)
+    {
+        return $"Hello, {name}!";
+    }
+
+    private static string Echo(string message)
+    {
+        return message;
+    }
+}
