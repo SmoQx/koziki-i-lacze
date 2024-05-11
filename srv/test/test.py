@@ -11,7 +11,7 @@ port = 55000  # Use the same port as the server
 client_socket.connect((host, port))
 
 # Send data to the server
-message = '{"method": "POST", "message": "data to be sent"}'
+message = '{"method": "GET", "message": "user_table"}'
 client_socket.send(message.encode())
 
 # Receive a response from the server
