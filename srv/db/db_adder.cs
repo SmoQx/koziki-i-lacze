@@ -1,21 +1,24 @@
-using SQLite;
-
-
-public class Adder
+namespace DB
 {
-    public static void Add<T>(T data) where T : new()
+    using SQLite;
+
+
+    public class Adder
     {
-        // Specify the path to the SQLite database file
-        string databasePath = "MyDatabase.db";
-
-        // Create a new SQLite connection
-        using (SQLiteConnection connection = new SQLiteConnection(databasePath))
+        public static void Add<T>(T data) where T : new()
         {
-            // Ensure connection is open
-            connection.CreateTable<T>();
+            // Specify the path to the SQLite database file
+            string databasePath = "MyDatabase.db";
 
-            // Insert data into the table
-            connection.Insert(data);
+            // Create a new SQLite connection
+            using (SQLiteConnection connection = new SQLiteConnection(databasePath))
+            {
+                // Ensure connection is open
+                connection.CreateTable<T>();
+
+                // Insert data into the table
+                connection.Insert(data);
+            }
         }
     }
 }
