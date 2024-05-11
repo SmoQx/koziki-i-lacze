@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using DB.handlers;
 
 class Program
 {
@@ -34,14 +35,16 @@ class Program
                 Socket handler = listener.Accept(); // Accept incoming connection
 
                 // Incoming data from the client
-                string data = null;
                 byte[] bytes = new byte[1024];
                 int bytesRec = handler.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                string data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
                 Console.WriteLine($"Received: {data}");
 
-                // Echo the data back to the client
-                byte[] msg = Encoding.ASCII.GetBytes(data);
+                // Handle the message using MessageHandler
+                string response = MessageHandler.HandleMessage(data);
+
+                // Echo the response back to the client
+                byte[] msg = Encoding.ASCII.GetBytes(response);
                 handler.Send(msg);
 
                 // Release the socket
