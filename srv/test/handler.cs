@@ -27,6 +27,10 @@ public class MessageHandler
             {
                 return Readers.read_scoreboard("../db/MyDatabase.db");
             }
+            else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
+            {
+                return "Valid_user";
+            }
             else
             {
                 return "Unknown method.";
