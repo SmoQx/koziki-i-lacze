@@ -29,6 +29,9 @@ public class MessageHandler
             }
             else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
             {
+                string user_name = "";
+                string password = "";
+                bool is_valid = DB.Find_user_and_passoword.finduser(user_name, password);
                 return "Valid_user";
             }
             else

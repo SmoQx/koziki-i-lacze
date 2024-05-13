@@ -2,7 +2,7 @@ namespace DB
 {
     using SQLite;
 
-    class Find_user_and_passoword
+    public class Find_user_and_passoword
     {
         static string databasePath = "MyDatabase.db";
         SQLiteConnection connection = new SQLiteConnection(databasePath);
