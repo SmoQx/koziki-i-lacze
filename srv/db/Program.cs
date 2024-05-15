@@ -35,7 +35,7 @@ class Program
 //        Readers.read_user_data();
 //        Readers.read_users();
 //        Readers.read_scoreboard();
-        Find_user_and_passoword found_user = new Find_user_and_passoword();
-        found_user.finduser(Hashing.ComputeSHA256Hash("user1"), Hashing.ComputeSHA256Hash("pass"));
+//        Find_user_and_passoword found_user = new Find_user_and_passoword();
+//        found_user.finduser(Hashing.ComputeSHA256Hash("user1"), Hashing.ComputeSHA256Hash("pass"));
     }
 }
