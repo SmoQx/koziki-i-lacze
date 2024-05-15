@@ -133,3 +133,9 @@ $RECYCLE.BIN/
 _NCrunch*
 
 ./GameProject2/Library/
+GameProject2/*.com
+GameProject2/*.class
+GameProject2/*.dll
+GameProject2/*.exe
+GameProject2/*.so
+GameProject2/*.o
