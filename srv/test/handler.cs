@@ -1,6 +1,5 @@
-using System;
 using Newtonsoft.Json.Linq;
-using DB.handlers;
+using DB;
 
 public class MessageHandler
 {
@@ -10,10 +9,11 @@ public class MessageHandler
         {
             // Parse the JSON message
             JObject messageObject = JObject.Parse(jsonMessage);
-
+            if (messageObject == null)
+                return "error whle parsing json";
             // Extract method and message from JSON
-            string method = messageObject["method"]?.ToString();
-            string message = messageObject["message"]?.ToString();
+            string method = messageObject["method"]?.ToString() ?? "";
+            string message = messageObject["message"]?.ToString() ?? "";
             // Determine response based on the method and message
             if (method == "greet")
             {
@@ -25,7 +25,14 @@ public class MessageHandler
             }
             else if (method == "GET" && message == "user_table")
             {
-                return DB.handlers.Readers.read_scoreboard("../db/MyDatabase.db");
+                return Readers.read_scoreboard("../db/MyDatabase.db");
+            }
+            else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
+            {
+                string user_name = "";
+                string password = "";
+                bool is_valid = DB.Find_user_and_passoword.finduser(user_name, password);
+                return "Valid_user";
             }
             else
             {
