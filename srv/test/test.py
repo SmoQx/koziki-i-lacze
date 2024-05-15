@@ -27,4 +27,5 @@ if __name__ == "__main__":
     main(echo)
     greet = {"method": "greet", "message": "user_table"}
     main(greet)
-
+    message = {"method": "PUT", "message": {"user_name": "usr", "password": "password"}}
+    main(message)

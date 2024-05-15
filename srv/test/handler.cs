@@ -29,10 +29,19 @@ public class MessageHandler
             }
             else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
             {
-                string user_name = "";
-                string password = "";
-                bool is_valid = DB.Find_user_and_passoword.finduser(user_name, password);
-                return "Valid_user";
+                JObject messageContent = JObject.Parse(message);
+                string db_path =  "../db/MyDatabase.db";
+                string user_name = messageContent["user_name"]?.ToString() ?? "";
+                string password = messageContent["password"]?.ToString() ?? "";
+                DB.Find_user_and_passoword instance = new Find_user_and_passoword();
+                Console.WriteLine(message);
+                Console.WriteLine(instance.finduser(user_name, password, db_path));
+                if (instance.finduser(user_name, password, db_path))
+                {
+                    return $"valid";
+                }
+                else
+                    return $"non valid";
             }
             else
             {
