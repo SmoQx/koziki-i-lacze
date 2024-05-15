@@ -31,8 +31,8 @@ public class MessageHandler
             {
                 string user_name = "";
                 string password = "";
-                bool is_valid = DB.Find_user_and_passoword.finduser(user_name, password);
-                return "Valid_user";
+                string response = DB.user_cred.Find_user_and_passoword.finduser(user_name, password);
+                return response;
             }
             else
             {
