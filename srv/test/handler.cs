@@ -63,6 +63,10 @@ public class MessageHandler
                 }
                 return $"added user {user_name}";
             }
+            else if (method == "GET" && message == "inventory")
+            {
+                return $"User inventory";
+            }
             else
             {
                 return "Unknown method.";
