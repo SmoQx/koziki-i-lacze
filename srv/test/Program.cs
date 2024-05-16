@@ -44,7 +44,6 @@ class Program
 
                 // Echo the response back to the client
                 string jresponse = json_responder(response);
-                Console.WriteLine(jresponse);
                 byte[] msg = Encoding.ASCII.GetBytes(jresponse);
                 handler.Send(msg);
 

@@ -11,7 +11,6 @@ namespace DB
             var what_was_found = connection.Table<User_credentials>().FirstOrDefault(u => u.UserName == userName && u.PasswordHash == userPassoword);
             if (what_was_found != null)
             {
-                Console.WriteLine($"user name: {what_was_found.UserName}, password: {what_was_found.PasswordHash}");
                 return true;
             }
             else

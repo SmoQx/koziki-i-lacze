@@ -1,4 +1,5 @@
 import socket
+import hashlib
 
 
 def main(mesage: dict, host: str = "127.0.1.1", port: int = 55000,):
@@ -20,16 +21,26 @@ def main(mesage: dict, host: str = "127.0.1.1", port: int = 55000,):
     client_socket.close()
 
 
+def calc_hash_sha256(text: str):
+    hasher = hashlib.sha256()
+    hasher.update(text.encode("utf-8"))
+    hashed_string = hasher.hexdigest()
+
+    return hashed_string
+
+
 if __name__ == "__main__":
-    message = {"method": "GET", "message": "user_table"}
-    main(message)
-    echo = {"method": "echo", "message": "user_table"}
-    main(echo)
-    greet = {"method": "greet", "message": "user_table"}
-    main(greet)
-    message = {"method": "GET", "message": {"user_name": "usr", "password": "password"}}
-    main(message)
-    add_user = {"method": "GET", "message": {"user_name": "username", "password": "password"}}
-    main(add_user)
-    user_info = {"method": "GET", "message": "inventory"}
-    main(user_info)
+#    message = {"method": "GET", "message": "user_table"}
+#    main(message)
+#    echo = {"method": "echo", "message": "user_table"}
+#    main(echo)
+#    greet = {"method": "greet", "message": "user_table"}
+#    main(greet)
+#    message = {"method": "GET", "message": {"user_name": "usr", "password": "password"}}
+#    main(message)
+#    add_user = {"method": "GET", "message": {"user_name": "username", "password": "password"}}
+#    main(add_user)
+#    user_info = {"method": "GET", "message": {"player_name": "nickname"}}
+#    main(user_info)
+    add_character = {"method": "PUT", "message": {"new_character": "yes", "Nickname": "name", "UserName": f'{calc_hash_sha256("username")}'}}
+    main(add_character)

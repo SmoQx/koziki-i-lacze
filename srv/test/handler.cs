@@ -34,14 +34,34 @@ public class MessageHandler
                 string user_name = messageContent["user_name"]?.ToString() ?? "";
                 string password = messageContent["password"]?.ToString() ?? "";
                 DB.Find_user_and_passoword instance = new Find_user_and_passoword();
-                Console.WriteLine(message);
-                Console.WriteLine(instance.finduser(DB.Hashing.ComputeSHA256Hash(user_name), DB.Hashing.ComputeSHA256Hash(password), db_path));
                 if (instance.finduser(DB.Hashing.ComputeSHA256Hash(user_name), DB.Hashing.ComputeSHA256Hash(password), db_path))
                 {
-                    return $"valid";
+                    return $"{Hashing.ComputeSHA256Hash(user_name)}";
                 }
                 else
                     return $"non valid";
+            }
+            else if (method == "GET" && message.Contains("av_characters"))
+            {
+                return $"available characters";
+            }
+            else if (method == "PUT"  && message.Contains("new_character"))
+            {
+                Console.WriteLine("entered new char");
+                JObject new_player_content = JObject.Parse(message);
+                var new_character = new UserData
+                {
+                    Nickname = new_player_content["Nickname"]?.ToString() ?? "",
+                    Level = 0,
+                    ItemsList = "",
+                    HP = 10,
+                    Mana = 10,
+                    Skills = "",
+                    Is_alive = true,
+                    UserName = new_player_content["UserName"]?.ToString() ?? ""
+                };
+                DB.Adder.Add(new_character, db_path);
+                return $"add new character";
             }
             else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
             {
@@ -61,14 +81,14 @@ public class MessageHandler
                 {
                     return $"error while adding user {e}";
                 }
-                return $"added user {user_name}";
+                return $"added user: {user_name}";
             }
-            else if (method == "GET" && message == "inventory")
+            else if (method == "GET" && message.Contains("player_name"))
             {
-//                JObject user_info = JObject.Parse(DB.Readers.read_user_data(db_path));
-                string user_info = DB.Readers.read_user_data(db_path);
-                Console.WriteLine(user_info);
-                return $"User inventory";
+                JObject messageContent = JObject.Parse(message);
+                string player_name = messageContent["player_name"]?.ToString() ?? "";
+                string user_info = DB.Readers.read_user_info(player_name, db_path);
+                return user_info;
             }
             else
             {
