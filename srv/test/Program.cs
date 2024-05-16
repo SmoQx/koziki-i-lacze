@@ -60,7 +60,8 @@ class Program
     }
     static string json_responder(string message)
     {
-        message = $"{{'message': {message}}}";
-        return JsonConvert.SerializeObject(message);
+        var responseObject = new { message = message };
+        string jsonResponse = JsonConvert.SerializeObject(responseObject);
+        return jsonResponse;
     }
 }
