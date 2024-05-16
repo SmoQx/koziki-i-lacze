@@ -63,10 +63,11 @@ public class MessageHandler
                 }
                 return $"added user {user_name}";
             }
-            else if (method == "GET" && message == "inventory")
+            else if (method == "GET" && message.Contains("inventory"))
             {
-//                JObject user_info = JObject.Parse(DB.Readers.read_user_data(db_path));
-                string user_info = DB.Readers.read_user_data(db_path);
+                JObject messageContent = JObject.Parse(message);
+                string player_name = messageContent["player_name"]?.ToString() ?? "";
+                string user_info = DB.Readers.read_user_info(db_path, player_name);
                 Console.WriteLine(user_info);
                 return $"User inventory";
             }
