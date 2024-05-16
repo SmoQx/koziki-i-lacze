@@ -45,8 +45,22 @@ public class MessageHandler
             {
                 return $"available characters";
             }
-            else if (method == "PUT"  && message.Contains("new_player"))
+            else if (method == "PUT"  && message.Contains("new_character"))
             {
+                Console.WriteLine("entered new char");
+                JObject new_player_content = JObject.Parse(message);
+                var new_character = new UserData
+                {
+                    Nickname = new_player_content["Nickname"]?.ToString() ?? "",
+                    Level = 0,
+                    ItemsList = "",
+                    HP = 10,
+                    Mana = 10,
+                    Skills = "",
+                    Is_alive = true,
+                    UserName = new_player_content["UserName"]?.ToString() ?? ""
+                };
+                DB.Adder.Add(new_character, db_path);
                 return $"add new character";
             }
             else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
