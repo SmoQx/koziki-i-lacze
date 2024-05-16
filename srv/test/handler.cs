@@ -65,6 +65,9 @@ public class MessageHandler
             }
             else if (method == "GET" && message == "inventory")
             {
+//                JObject user_info = JObject.Parse(DB.Readers.read_user_data(db_path));
+                string user_info = DB.Readers.read_user_data(db_path);
+                Console.WriteLine(user_info);
                 return $"User inventory";
             }
             else
