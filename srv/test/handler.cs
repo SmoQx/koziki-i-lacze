@@ -41,9 +41,13 @@ public class MessageHandler
                 else
                     return $"non valid";
             }
+            else if (method == "GET" && message.Contains("av_characters"))
+            {
+                return $"available characters";
+            }
             else if (method == "PUT"  && message.Contains("new_player"))
             {
-                return $"add new player";
+                return $"add new character";
             }
             else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
             {
