@@ -48,7 +48,9 @@ namespace DB
                         ItemsList = item.ItemsList,
                         HP = item.HP,
                         Mana = item.Mana,
-                        Skills = item.Skills
+                        Skills = item.Skills,
+                        Is_alive = item.Is_alive,
+                        UserName = item.UserName
                     };
                     player_stats.Add(player);
                 }

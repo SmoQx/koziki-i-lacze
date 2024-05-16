@@ -36,10 +36,14 @@ public class MessageHandler
                 DB.Find_user_and_passoword instance = new Find_user_and_passoword();
                 if (instance.finduser(DB.Hashing.ComputeSHA256Hash(user_name), DB.Hashing.ComputeSHA256Hash(password), db_path))
                 {
-                    return $"valid";
+                    return $"{Hashing.ComputeSHA256Hash(user_name)}";
                 }
                 else
                     return $"non valid";
+            }
+            else if (method == "PUT"  && message.Contains("new_player"))
+            {
+                return $"add new player";
             }
             else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
             {
