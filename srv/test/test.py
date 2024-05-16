@@ -31,5 +31,5 @@ if __name__ == "__main__":
     main(message)
     add_user = {"method": "GET", "message": {"user_name": "username", "password": "password"}}
     main(add_user)
-    user_info = {"method": "GET", "message": {"inventory": "usr"}}
+    user_info = {"method": "GET", "message": {"player_name": "nickname"}}
     main(user_info)

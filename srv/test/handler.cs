@@ -34,8 +34,6 @@ public class MessageHandler
                 string user_name = messageContent["user_name"]?.ToString() ?? "";
                 string password = messageContent["password"]?.ToString() ?? "";
                 DB.Find_user_and_passoword instance = new Find_user_and_passoword();
-                Console.WriteLine(message);
-                Console.WriteLine(instance.finduser(DB.Hashing.ComputeSHA256Hash(user_name), DB.Hashing.ComputeSHA256Hash(password), db_path));
                 if (instance.finduser(DB.Hashing.ComputeSHA256Hash(user_name), DB.Hashing.ComputeSHA256Hash(password), db_path))
                 {
                     return $"valid";
@@ -61,15 +59,14 @@ public class MessageHandler
                 {
                     return $"error while adding user {e}";
                 }
-                return $"added user {user_name}";
+                return $"added user: {user_name}";
             }
-            else if (method == "GET" && message.Contains("inventory"))
+            else if (method == "GET" && message.Contains("player_name"))
             {
                 JObject messageContent = JObject.Parse(message);
                 string player_name = messageContent["player_name"]?.ToString() ?? "";
-                string user_info = DB.Readers.read_user_info(db_path, player_name);
-                Console.WriteLine(user_info);
-                return $"User inventory";
+                string user_info = DB.Readers.read_user_info(player_name, db_path);
+                return user_info;
             }
             else
             {
