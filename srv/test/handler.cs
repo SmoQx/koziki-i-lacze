@@ -7,6 +7,7 @@ public class MessageHandler
     {
         try
         {
+            string db_path =  "../db/MyDatabase.db";
             // Parse the JSON message
             JObject messageObject = JObject.Parse(jsonMessage);
             if (messageObject == null)
@@ -25,23 +26,49 @@ public class MessageHandler
             }
             else if (method == "GET" && message == "user_table")
             {
-                return Readers.read_scoreboard("../db/MyDatabase.db");
+                return Readers.read_scoreboard(db_path);
             }
-            else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
+            else if (method == "GET" && message.Contains("user_name") && message.Contains("password"))
             {
                 JObject messageContent = JObject.Parse(message);
-                string db_path =  "../db/MyDatabase.db";
                 string user_name = messageContent["user_name"]?.ToString() ?? "";
                 string password = messageContent["password"]?.ToString() ?? "";
                 DB.Find_user_and_passoword instance = new Find_user_and_passoword();
                 Console.WriteLine(message);
-                Console.WriteLine(instance.finduser(user_name, password, db_path));
-                if (instance.finduser(user_name, password, db_path))
+                Console.WriteLine(instance.finduser(DB.Hashing.ComputeSHA256Hash(user_name), DB.Hashing.ComputeSHA256Hash(password), db_path));
+                if (instance.finduser(DB.Hashing.ComputeSHA256Hash(user_name), DB.Hashing.ComputeSHA256Hash(password), db_path))
                 {
                     return $"valid";
                 }
                 else
                     return $"non valid";
+            }
+            else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
+            {
+                JObject messageContent = JObject.Parse(message);
+                string user_name = messageContent["user_name"]?.ToString() ?? "";
+                string password = messageContent["password"]?.ToString() ?? "";
+                var user_cred_to_add = new User_credentials
+                {
+                    UserName = DB.Hashing.ComputeSHA256Hash(user_name),
+                    PasswordHash = DB.Hashing.ComputeSHA256Hash(password)
+                };
+                try
+                {
+                DB.Adder.Add(user_cred_to_add, db_path);
+                }
+                catch (Exception e)
+                {
+                    return $"error while adding user {e}";
+                }
+                return $"added user {user_name}";
+            }
+            else if (method == "GET" && message == "inventory")
+            {
+//                JObject user_info = JObject.Parse(DB.Readers.read_user_data(db_path));
+                string user_info = DB.Readers.read_user_data(db_path);
+                Console.WriteLine(user_info);
+                return $"User inventory";
             }
             else
             {

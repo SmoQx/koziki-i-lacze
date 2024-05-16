@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -42,7 +43,9 @@ class Program
                 string response = MessageHandler.HandleMessage(data);
 
                 // Echo the response back to the client
-                byte[] msg = Encoding.ASCII.GetBytes(response);
+                string jresponse = json_responder(response);
+                Console.WriteLine(jresponse);
+                byte[] msg = Encoding.ASCII.GetBytes(jresponse);
                 handler.Send(msg);
 
                 // Release the socket
@@ -54,5 +57,11 @@ class Program
         {
             Console.WriteLine($"Error listening on port {port}: {e.ToString()}");
         }
+    }
+    static string json_responder(string message)
+    {
+        var responseObject = new { message = message };
+        string jsonResponse = JsonConvert.SerializeObject(responseObject);
+        return jsonResponse;
     }
 }

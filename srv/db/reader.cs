@@ -32,7 +32,7 @@ namespace DB
                 return JsonConvert.SerializeObject(scoreboardData);
             }
         }
-        public string read_user_data(string databasePath)
+        public static string read_user_data(string databasePath)
         {
             List<object> player_stats = new List<object>();
             using (SQLiteConnection connection = new SQLiteConnection(databasePath))
@@ -50,7 +50,7 @@ namespace DB
                         Mana = item.Mana,
                         Skills = item.Skills
                     };
-
+                    player_stats.Add(player);
                 }
                 return JsonConvert.SerializeObject(player_stats);
             }
