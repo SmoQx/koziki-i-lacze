@@ -32,7 +32,7 @@ namespace DB
                 return JsonConvert.SerializeObject(scoreboardData);
             }
         }
-        public string read_user_data(string databasePath)
+        public static string read_user_data(string databasePath)
         {
             List<object> player_stats = new List<object>();
             using (SQLiteConnection connection = new SQLiteConnection(databasePath))
@@ -48,12 +48,25 @@ namespace DB
                         ItemsList = item.ItemsList,
                         HP = item.HP,
                         Mana = item.Mana,
-                        Skills = item.Skills
+                        Skills = item.Skills,
+                        Is_alive = item.Is_alive,
+                        UserName = item.UserName
                     };
-
+                    player_stats.Add(player);
                 }
                 return JsonConvert.SerializeObject(player_stats);
             }
+        }
+        public static string read_user_info(string player_name, string databasePath)
+        {
+            SQLiteConnection connection = new SQLiteConnection(databasePath);
+            var what_was_found = connection.Table<UserData>().FirstOrDefault(u => u.Nickname == player_name);
+            if (what_was_found != null)
+            {
+                return JsonConvert.SerializeObject(what_was_found);
+            }
+            else
+                return "no player data";
         }
     }
 }

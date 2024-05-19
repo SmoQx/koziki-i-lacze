@@ -7,6 +7,7 @@ public class MessageHandler
     {
         try
         {
+            string db_path =  "../db/MyDatabase.db";
             // Parse the JSON message
             JObject messageObject = JObject.Parse(jsonMessage);
             if (messageObject == null)
@@ -25,14 +26,69 @@ public class MessageHandler
             }
             else if (method == "GET" && message == "user_table")
             {
-                return Readers.read_scoreboard("../db/MyDatabase.db");
+                return Readers.read_scoreboard(db_path);
+            }
+            else if (method == "GET" && message.Contains("user_name") && message.Contains("password"))
+            {
+                JObject messageContent = JObject.Parse(message);
+                string user_name = messageContent["user_name"]?.ToString() ?? "";
+                string password = messageContent["password"]?.ToString() ?? "";
+                DB.Find_user_and_passoword instance = new Find_user_and_passoword();
+                if (instance.finduser(DB.Hashing.ComputeSHA256Hash(user_name), DB.Hashing.ComputeSHA256Hash(password), db_path))
+                {
+                    return $"{Hashing.ComputeSHA256Hash(user_name)}";
+                }
+                else
+                    return $"non valid";
+            }
+            else if (method == "GET" && message.Contains("av_characters"))
+            {
+                return $"available characters";
+            }
+            else if (method == "PUT"  && message.Contains("new_character"))
+            {
+                Console.WriteLine("entered new char");
+                JObject new_player_content = JObject.Parse(message);
+                var new_character = new UserData
+                {
+                    Nickname = new_player_content["Nickname"]?.ToString() ?? "",
+                    Level = 0,
+                    ItemsList = "",
+                    HP = 10,
+                    Mana = 10,
+                    Skills = "",
+                    Is_alive = true,
+                    UserName = new_player_content["UserName"]?.ToString() ?? ""
+                };
+                DB.Adder.Add(new_character, db_path);
+                return $"add new character";
             }
             else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
             {
-                string user_name = "";
-                string password = "";
-                bool is_valid = DB.Find_user_and_passoword.finduser(user_name, password);
-                return "Valid_user";
+                JObject messageContent = JObject.Parse(message);
+                string user_name = messageContent["user_name"]?.ToString() ?? "";
+                string password = messageContent["password"]?.ToString() ?? "";
+                var user_cred_to_add = new User_credentials
+                {
+                    UserName = DB.Hashing.ComputeSHA256Hash(user_name),
+                    PasswordHash = DB.Hashing.ComputeSHA256Hash(password)
+                };
+                try
+                {
+                DB.Adder.Add(user_cred_to_add, db_path);
+                }
+                catch (Exception e)
+                {
+                    return $"error while adding user {e}";
+                }
+                return $"added user: {user_name}";
+            }
+            else if (method == "GET" && message.Contains("player_name"))
+            {
+                JObject messageContent = JObject.Parse(message);
+                string player_name = messageContent["player_name"]?.ToString() ?? "";
+                string user_info = DB.Readers.read_user_info(player_name, db_path);
+                return user_info;
             }
             else
             {
