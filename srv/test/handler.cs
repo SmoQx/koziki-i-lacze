@@ -59,7 +59,7 @@ public class MessageHandler
                     Mana = 10,
                     Skills = "",
                     Is_alive = true,
-                    UserName = new_player_content["UserName"]?.ToString() ?? ""
+                    UserName = DB.Hashing.ComputeSHA256Hash(new_player_content["UserName"]?.ToString() ?? "")
                 };
                 DB.Adder.Add(new_character, db_path);
                 return $"add new character";
