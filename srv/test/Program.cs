@@ -16,7 +16,7 @@ class Program
         {
             // Establish the local endpoint for the socket
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddress = ipHostInfo.AddressList[0]; // Just using the first available IP address
+            IPAddress ipAddress = IPAddress.Parse("127.0.1.1"); // Just using the first available IP address
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, port);
 
             // Create a TCP/IP socket

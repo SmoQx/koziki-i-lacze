@@ -32,15 +32,15 @@ def calc_hash_sha256(text: str):
 if __name__ == "__main__":
 #    message = {"method": "GET", "message": "user_table"}
 #    main(message)
-#    echo = {"method": "echo", "message": "user_table"}
-#    main(echo)
+    echo = {"method": "echo", "message": "Ok"}
+    main(echo)
 #    greet = {"method": "greet", "message": "user_table"}
 #    main(greet)
 #    message = {"method": "GET", "message": {"user_name": "usr", "password": "password"}}
 #    main(message)
 #    add_user = {"method": "GET", "message": {"user_name": "username", "password": "password"}}
 #    main(add_user)
-#    user_info = {"method": "GET", "message": {"player_name": "nickname"}}
-#    main(user_info)
-    add_character = {"method": "PUT", "message": {"new_character": "yes", "Nickname": "name", "UserName": f'{calc_hash_sha256("username")}'}}
-    main(add_character)
+    user_info = {"method": "GET", "message": {"player_name": "name", "user_name": "username"}}
+    main(user_info)
+#    add_character = {"method": "PUT", "message": {"new_character": "yes", "Nickname": "name", "UserName": f'{calc_hash_sha256("username")}'}}
+#    main(add_character)

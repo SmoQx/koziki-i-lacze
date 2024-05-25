@@ -18,6 +18,7 @@ public class MessageHandler
             // Determine response based on the method and message
             if (method == "greet")
             {
+                Console.WriteLine($"Server is sending: a great");
                 return Greet(message);
             }
             else if (method == "echo")
@@ -83,11 +84,13 @@ public class MessageHandler
                 }
                 return $"added user: {user_name}";
             }
-            else if (method == "GET" && message.Contains("player_name"))
+            else if (method == "GET" && message.Contains("player_name") && message.Contains("user_name"))
             {
                 JObject messageContent = JObject.Parse(message);
                 string player_name = messageContent["player_name"]?.ToString() ?? "";
-                string user_info = DB.Readers.read_user_info(player_name, db_path);
+                string user_name = messageContent["user_name"]?.ToString() ?? "";
+                user_name = DB.Hashing.ComputeSHA256Hash(user_name);
+                string user_info = DB.Readers.read_user_info(player_name, user_name, db_path);
                 return user_info;
             }
             else

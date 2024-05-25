@@ -57,10 +57,10 @@ namespace DB
                 return JsonConvert.SerializeObject(player_stats);
             }
         }
-        public static string read_user_info(string player_name, string databasePath)
+        public static string read_user_info(string player_name, string user_name, string databasePath)
         {
             SQLiteConnection connection = new SQLiteConnection(databasePath);
-            var what_was_found = connection.Table<UserData>().FirstOrDefault(u => u.Nickname == player_name);
+            var what_was_found = connection.Table<UserData>().FirstOrDefault(u => u.Nickname == player_name && u.UserName == user_name);
             if (what_was_found != null)
             {
                 return JsonConvert.SerializeObject(what_was_found);
