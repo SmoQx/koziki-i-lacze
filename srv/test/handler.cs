@@ -90,7 +90,7 @@ public class MessageHandler
                 string player_name = messageContent["player_name"]?.ToString() ?? "";
                 string user_name = messageContent["user_name"]?.ToString() ?? "";
                 user_name = DB.Hashing.ComputeSHA256Hash(user_name);
-                string user_info = DB.Readers.read_user_info(player_name, user_name, db_path);
+                string user_info = DB.Readers.read_user_info(user_name, db_path);
                 return user_info;
             }
             else
