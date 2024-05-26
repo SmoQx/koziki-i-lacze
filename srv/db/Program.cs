@@ -32,7 +32,7 @@ class Program
 //        Adder.Add(userData);
 //        Adder.Add(user);
 //        Adder.Add(player);
-        Console.WriteLine(Readers.read_user_data("MyDatabase.db"));
+//        Console.WriteLine(Readers.read_user_data("MyDatabase.db"));
 //        Readers.read_users();
 //        Readers.read_scoreboard();
 //        Find_user_and_passoword found_user = new Find_user_and_passoword();
