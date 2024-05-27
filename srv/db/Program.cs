@@ -15,20 +15,22 @@ class Program
         };
         var user = new User_credentials
         {
-            UserName = Hashing.ComputeSHA256Hash("user1"),
+            UserName = Hashing.ComputeSHA256Hash("new"),
             PasswordHash = Hashing.ComputeSHA256Hash("pass")
         };
         var player = new PlayerData
         {
-            Nick = "Sadas",
-            PoziomDoswiadczenia = 100,
+            Id = 2,
+            Nick = "Sdas",
+            PoziomDoswiadczenia = 50,
             Zwyciestwa = 100,
             Porazki = 20,
             Ratio = 5,
             CzasGry = "50h"
         };
 //
-        Adder.Add(userData, "MyDatabase.db");
+        Adder.Update(player, "MyDatabase.db");
+        Adder.Update(user, "MyDatabase.db");
 //        Adder.Add(user);
 //        Adder.Add(player, "MyDatabase.db");
 //        Console.WriteLine(Readers.read_user_data("MyDatabase.db"));

@@ -90,18 +90,27 @@ public class MessageHandler
                 var player = new PlayerData
                 {
                     Nick = messageContent["Nick"]?.ToString() ?? "" ,
-                    PoziomDoswiadczenia = messageContent["PoziomDoswiadczenia"]?.ToString() ?? "",
-                    Zwyciestwa = messageContent["Zwyciestwa"]?.ToString() ?? "",
-                    Porazki = messageContent["Porazki"]?.ToString() ?? "",
-                    Ratio = messageContent["Ratio"]?.ToString() ?? "",
+                    PoziomDoswiadczenia = int.TryParse(messageContent["PoziomDoswiadczenia"]?.ToString(), out int poziomDoswiadczenia) ? poziomDoswiadczenia : 0,
+                    Zwyciestwa = int.TryParse(messageContent["Zwyciestwa"]?.ToString(), out int zwyciestwa) ? zwyciestwa : 0,
+                    Porazki = int.TryParse(messageContent["Porazki"]?.ToString(), out int porazki) ? porazki : 0,
+                    Ratio = float.TryParse(messageContent["Ratio"]?.ToString(), out float ratio) ? ratio : 0f,
                     CzasGry = messageContent["CzasGry"]?.ToString() ?? ""
                 };
+                
                 try
                 {
                     DB.Adder.Add(player, db_path);
                 }
                 catch (Exception e)
                 {
+                    try
+                    {
+                        DB.Adder.Update(player, db_path);
+                    }
+                    catch (Exception ex)
+                    {
+                        return $"{ex}";
+                    }
                     return $"error while adding to leaderboard {e}";
                 }
                 return $"added to leaderboard {player}";

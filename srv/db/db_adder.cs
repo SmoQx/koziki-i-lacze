@@ -2,7 +2,6 @@ namespace DB
 {
     using SQLite;
 
-
     public class Adder
     {
         public static void Add<T>(T data, string databasePath) where T : new()
@@ -15,6 +14,13 @@ namespace DB
 
                 // Insert data into the table
                 connection.Insert(data);
+            }
+        }
+        public static void Update<T>(T data, string databasePath) where T : new()
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(databasePath))
+            {
+                connection.Update(data);
             }
         }
     }
