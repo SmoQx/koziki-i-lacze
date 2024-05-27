@@ -919,7 +919,7 @@ GameObject:
   - component: {fileID: 938038360}
   - component: {fileID: 938038359}
   - component: {fileID: 938038358}
-  - component: {fileID: 938038362}
+  - component: {fileID: 938038363}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1010,7 +1010,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &938038362
+--- !u!114 &938038363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1019,9 +1019,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 938038357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e08121fa91cf014ab23fd8c67605cb6, type: 3}
+  m_Script: {fileID: 11500000, guid: aedec50219c93b54cad1293607282b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  login: {fileID: 1627205943}
+  password: {fileID: 19106459}
 --- !u!1 &1043112716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,10 +1107,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 938038362}
-        m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+      - m_Target: {fileID: 938038363}
+        m_TargetAssemblyTypeName: RegisterScript, Assembly-CSharp
+        m_MethodName: Register
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
