@@ -27,13 +27,14 @@ class GitChangeHandler(FileSystemEventHandler):
 
     def on_modified(self, event):
         if not event.is_directory:
-            commit_files(self.repo)
+            if self.repo.is_dirty(untracked_files=True):
+                print("Detected changes in the repository...")
+                commit_files(self.repo)
 
 # Main function
 def main(repo_dir):
     repo = init_repository(repo_dir)
     commit_files(repo)
-
     # Set up watchdog to monitor directory for changes
     event_handler = GitChangeHandler(repo)
     observer = Observer()
