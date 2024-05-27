@@ -77,19 +77,41 @@ public class MessageHandler
                 try
                 {
                 DB.Adder.Add(user_cred_to_add, db_path);
-                }
+                } 
                 catch (Exception e)
                 {
                     return $"error while adding user {e}";
                 }
                 return $"added user: {user_name}";
             }
+            else if (method == "PUT" && message.Contains("Nick"))
+            {
+                JObject messageContent = JObject.Parse(message);
+                var player = new PlayerData
+                {
+                    Nick = messageContent["Nick"]?.ToString() ?? "" ,
+                    PoziomDoswiadczenia = messageContent["PoziomDoswiadczenia"]?.ToString() ?? "",
+                    Zwyciestwa = messageContent["Zwyciestwa"]?.ToString() ?? "",
+                    Porazki = messageContent["Porazki"]?.ToString() ?? "",
+                    Ratio = messageContent["Ratio"]?.ToString() ?? "",
+                    CzasGry = messageContent["CzasGry"]?.ToString() ?? ""
+                };
+                try
+                {
+                    DB.Adder.Add(player, db_path);
+                }
+                catch (Exception e)
+                {
+                    return $"error while adding to leaderboard {e}";
+                }
+                return $"added to leaderboard {player}";
+            }
             else if (method == "GET" && message.Contains("player_name") && message.Contains("user_name"))
             {
                 JObject messageContent = JObject.Parse(message);
                 string player_name = messageContent["player_name"]?.ToString() ?? "";
                 string user_name = messageContent["user_name"]?.ToString() ?? "";
-                user_name = DB.Hashing.ComputeSHA256Hash(user_name);
+                Console.WriteLine(user_name);
                 string user_info = DB.Readers.read_user_info(user_name, db_path);
                 return user_info;
             }

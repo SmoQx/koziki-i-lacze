@@ -4,7 +4,7 @@ public class PlayerData
 {
     [PrimaryKey, AutoIncrement]
     public int Id { get; set; }
-    public int Pozycja { get; set; }
+    [Unique]
     public string Nick { get; set; }
     public int PoziomDoswiadczenia { get; set; }
     public int Zwyciestwa { get; set; }
