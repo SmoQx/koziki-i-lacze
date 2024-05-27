@@ -4,6 +4,7 @@ public class UserData
 {
     [PrimaryKey, AutoIncrement]
     public int Id { get; set; }
+    [Unique]
     public string Nickname { get; set; }
     public int Level { get; set; }
     public string ItemsList { get; set; }

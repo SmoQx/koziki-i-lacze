@@ -4,15 +4,15 @@ class Program
 {
     static void Main(string[] args)
     {
-//    var userData = new UserData
-//        {
-//            Nickname = "nickname",
-//            Level = 10,
-//            ItemsList = "itemsList",
-//            HP = 10,
-//            Mana = 20,
-//            Skills = "skills"
-//        };
+    var userData = new UserData
+        {
+            Nickname = "easd",
+            Level = 10,
+            ItemsList = "itemsList",
+            HP = 10,
+            Mana = 20,
+            Skills = "skills"
+        };
         var user = new User_credentials
         {
             UserName = Hashing.ComputeSHA256Hash("user1"),
@@ -28,9 +28,9 @@ class Program
             CzasGry = "50h"
         };
 //
-//        Adder.Add(userData);
+        Adder.Add(userData, "MyDatabase.db");
 //        Adder.Add(user);
-        Adder.Add(player, "MyDatabase.db");
+//        Adder.Add(player, "MyDatabase.db");
 //        Console.WriteLine(Readers.read_user_data("MyDatabase.db"));
 //        Readers.read_users();
 //        Readers.read_scoreboard("MyDatabase.db");
