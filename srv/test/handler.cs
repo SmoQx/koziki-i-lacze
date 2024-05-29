@@ -46,6 +46,35 @@ public class MessageHandler
             {
                 return $"available characters";
             }
+            else if (method == "GET" && message.Contains("player_name") && message.Contains("user_name"))
+            {
+                JObject messageContent = JObject.Parse(message);
+                string player_name = messageContent["player_name"]?.ToString() ?? "";
+                string user_name = messageContent["user_name"]?.ToString() ?? "";
+                Console.WriteLine(user_name);
+                string user_info = DB.Readers.read_user_info(user_name, db_path);
+                return user_info;
+            }
+            else if (method == "PUT" && message.Contains("UserName") && message.Contains("Nickname"))
+            {
+                Console.WriteLine("Changed data about character");
+                JObject update_character_info = JObject.Parse(message);
+                var new_character = new UserData
+                {
+                    Id = int.Parse(update_character_info["Id"].ToString()),
+                    Nickname = update_character_info["Nickname"]?.ToString() ?? "",
+                    Level = int.Parse(update_character_info["Level"].ToString()),
+                    ItemsList = update_character_info["ItemsList"]?.ToString() ?? "",
+                    HP = int.Parse(update_character_info["HP"].ToString()),
+                    Mana = int.Parse(update_character_info["Mana"].ToString()),
+                    Skills = update_character_info["Skills"]?.ToString() ?? "",
+                    Is_alive = bool.Parse(update_character_info["Is_alive"].ToString()),
+                    UserName = update_character_info["UserName"]?.ToString() ?? ""
+                };
+                DB.Adder.Update(new_character, db_path);
+
+                return $"Updated character data";
+            }
             else if (method == "PUT"  && message.Contains("new_character"))
             {
                 Console.WriteLine("entered new char");
@@ -89,6 +118,7 @@ public class MessageHandler
                 JObject messageContent = JObject.Parse(message);
                 var player = new PlayerData
                 {
+                    Id = int.Parse(messageContent["Id"].ToString()),
                     Nick = messageContent["Nick"]?.ToString() ?? "" ,
                     PoziomDoswiadczenia = int.TryParse(messageContent["PoziomDoswiadczenia"]?.ToString(), out int poziomDoswiadczenia) ? poziomDoswiadczenia : 0,
                     Zwyciestwa = int.TryParse(messageContent["Zwyciestwa"]?.ToString(), out int zwyciestwa) ? zwyciestwa : 0,
@@ -114,15 +144,6 @@ public class MessageHandler
                     return $"error while adding to leaderboard {e}";
                 }
                 return $"added to leaderboard {player}";
-            }
-            else if (method == "GET" && message.Contains("player_name") && message.Contains("user_name"))
-            {
-                JObject messageContent = JObject.Parse(message);
-                string player_name = messageContent["player_name"]?.ToString() ?? "";
-                string user_name = messageContent["user_name"]?.ToString() ?? "";
-                Console.WriteLine(user_name);
-                string user_info = DB.Readers.read_user_info(user_name, db_path);
-                return user_info;
             }
             else
             {
