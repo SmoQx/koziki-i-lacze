@@ -55,6 +55,24 @@ public class MessageHandler
                 string user_info = DB.Readers.read_user_info(user_name, db_path);
                 return user_info;
             }
+            else if (method == "PUT"  && message.Contains("new_character"))
+            {
+                Console.WriteLine("entered new char");
+                JObject new_player_content = JObject.Parse(message);
+                var new_character = new UserData
+                {
+                    Nickname = new_player_content["Nickname"]?.ToString() ?? "",
+                    Level = 0,
+                    ItemsList = "",
+                    HP = 10,
+                    Mana = 10,
+                    Skills = "",
+                    Is_alive = true,
+                    UserName = DB.Hashing.ComputeSHA256Hash(new_player_content["UserName"]?.ToString() ?? "")
+                };
+                DB.Adder.Add(new_character, db_path);
+                return $"add new character";
+            }
             else if (method == "PUT" && message.Contains("UserName") && message.Contains("Nickname"))
             {
                 Console.WriteLine("Changed data about character");
@@ -74,24 +92,6 @@ public class MessageHandler
                 DB.Adder.Update(new_character, db_path);
 
                 return $"Updated character data";
-            }
-            else if (method == "PUT"  && message.Contains("new_character"))
-            {
-                Console.WriteLine("entered new char");
-                JObject new_player_content = JObject.Parse(message);
-                var new_character = new UserData
-                {
-                    Nickname = new_player_content["Nickname"]?.ToString() ?? "",
-                    Level = 0,
-                    ItemsList = "",
-                    HP = 10,
-                    Mana = 10,
-                    Skills = "",
-                    Is_alive = true,
-                    UserName = DB.Hashing.ComputeSHA256Hash(new_player_content["UserName"]?.ToString() ?? "")
-                };
-                DB.Adder.Add(new_character, db_path);
-                return $"add new character";
             }
             else if (method == "PUT" && message.Contains("user_name") && message.Contains("password"))
             {
