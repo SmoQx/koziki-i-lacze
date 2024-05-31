@@ -63,10 +63,10 @@ public class MessageHandler
                 {
                     Nickname = new_player_content["Nickname"]?.ToString() ?? "",
                     Level = 0,
-                    ItemsList = "",
+                    ItemsList = "{\"Money\": 10}",
                     HP = 10,
                     Mana = 10,
-                    Skills = "",
+                    Skills = "{}",
                     Is_alive = true,
                     UserName = DB.Hashing.ComputeSHA256Hash(new_player_content["UserName"]?.ToString() ?? "")
                 };
