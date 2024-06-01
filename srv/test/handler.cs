@@ -116,15 +116,17 @@ public class MessageHandler
             else if (method == "PUT" && message.Contains("Nick"))
             {
                 JObject messageContent = JObject.Parse(message);
+                int win;
+                int pd;
+                int.TryParse(messageContent["PD"]?.ToString(), out pd);
+                int.TryParse(messageContent["Win"]?.ToString(), out win);
                 var player = new PlayerData
                 {
-                    Id = int.Parse(messageContent["Id"].ToString()),
-                    Nick = messageContent["Nick"]?.ToString() ?? "" ,
-                    PoziomDoswiadczenia = int.TryParse(messageContent["PoziomDoswiadczenia"]?.ToString(), out int poziomDoswiadczenia) ? poziomDoswiadczenia : 0,
-                    Zwyciestwa = int.TryParse(messageContent["Zwyciestwa"]?.ToString(), out int zwyciestwa) ? zwyciestwa : 0,
-                    CzasGry = messageContent["CzasGry"]?.ToString() ?? ""
+                    Nick = messageContent["Nick"].ToString(),
+                    PoziomDoswiadczenia = pd,
+                    Zwyciestwa = win,
+                    CzasGry = messageContent["GameTime"]?.ToString() ?? ""                
                 };
-                
                 try
                 {
                     DB.Adder.Add(player, db_path);
@@ -139,9 +141,8 @@ public class MessageHandler
                     {
                         return $"{ex}";
                     }
-                    return $"error while adding to leaderboard {e}";
                 }
-                return $"added to leaderboard {player}";
+                return $"added to leaderboard {player.Nick}";
             }
             else
             {

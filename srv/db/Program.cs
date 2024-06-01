@@ -20,9 +20,8 @@ class Program
         };
         var player = new PlayerData
         {
-            Id = 2,
             Nick = "Sdas",
-            PoziomDoswiadczenia = 50,
+            PoziomDoswiadczenia = 111,
             Zwyciestwa = 100,
             CzasGry = "50h"
         };

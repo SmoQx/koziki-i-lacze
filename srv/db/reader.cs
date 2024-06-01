@@ -17,7 +17,6 @@ namespace DB
                 {
                     var playerData = new
                                         {
-                                            ID = p.Id,
                                             Nick = p.Nick,
                                             PoziomDoswiadczenia = p.PoziomDoswiadczenia,
                                             Zwyciestwa = p.Zwyciestwa,

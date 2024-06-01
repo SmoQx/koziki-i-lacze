@@ -40,7 +40,9 @@ if __name__ == "__main__":
 #    main(message)
 #    add_user = {"method": "GET", "message": {"user_name": "username", "password": "password"}}
 #    main(add_user)
-    user_info = {"method": "GET", "message": {"player_name": "name", "user_name": "username"}}
-    main(user_info)
-#    add_character = {"method": "PUT", "message": {"new_character": "yes", "Nickname": "name", "UserName": "username"}'}}
+#    user_info = {"method": "GET", "message": {"player_name": "name", "user_name": "username"}}
+#    main(user_info)
+    add_to_leaderboard = {"method": "PUT", "message":{"Nick": "news", "PD": "29", "Win": "4", "GameTime": "10"}}
+    main(add_to_leaderboard)
+#    add_character = {"method": "PUT", "message": {"new_character": "yes", "Nickname": "name", "UserName": "username"}}
 #    main(add_character)

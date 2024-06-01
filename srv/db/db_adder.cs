@@ -20,6 +20,7 @@ namespace DB
         {
             using (SQLiteConnection connection = new SQLiteConnection(databasePath))
             {
+                connection.CreateTable<T>();
                 connection.Update(data);
             }
         }
