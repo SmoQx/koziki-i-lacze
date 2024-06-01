@@ -23,7 +23,7 @@ class Program
             Nick = "Sdas",
             PoziomDoswiadczenia = 111,
             Zwyciestwa = 100,
-            CzasGry = "50h"
+            CzasGry = 0
         };
 //
         Adder.Update(player, "MyDatabase.db");

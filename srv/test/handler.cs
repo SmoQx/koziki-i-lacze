@@ -118,14 +118,16 @@ public class MessageHandler
                 JObject messageContent = JObject.Parse(message);
                 int win;
                 int pd;
+                int gametime;
                 int.TryParse(messageContent["PD"]?.ToString(), out pd);
                 int.TryParse(messageContent["Win"]?.ToString(), out win);
+                int.TryParse(messageContent["GameTime"]?.ToString(), out gametime);
                 var player = new PlayerData
                 {
                     Nick = messageContent["Nick"].ToString(),
                     PoziomDoswiadczenia = pd,
                     Zwyciestwa = win,
-                    CzasGry = messageContent["GameTime"]?.ToString() ?? ""                
+                    CzasGry =  gametime         
                 };
                 try
                 {
