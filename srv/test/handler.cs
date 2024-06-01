@@ -37,7 +37,7 @@ public class MessageHandler
                 DB.Find_user_and_passoword instance = new Find_user_and_passoword();
                 if (instance.finduser(DB.Hashing.ComputeSHA256Hash(user_name), DB.Hashing.ComputeSHA256Hash(password), db_path))
                 {
-                    return $"{{\"Correct\":{Hashing.ComputeSHA256Hash(user_name)}}}";
+                    return $"{{\"Correct\":\"{Hashing.ComputeSHA256Hash(user_name)}\"}}";
                 }
                 else
                     return $"non valid";
