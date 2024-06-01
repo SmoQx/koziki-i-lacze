@@ -122,29 +122,53 @@ public class MessageHandler
                 int.TryParse(messageContent["PD"]?.ToString(), out pd);
                 int.TryParse(messageContent["Win"]?.ToString(), out win);
                 int.TryParse(messageContent["GameTime"]?.ToString(), out gametime);
-                var player = new PlayerData
-                {
-                    Nick = messageContent["Nick"].ToString(),
-                    PoziomDoswiadczenia = pd,
-                    Zwyciestwa = win,
-                    CzasGry =  gametime         
-                };
+
+                string nick = messageContent["Nick"].ToString();
+
                 try
                 {
-                    DB.Adder.Add(player, db_path);
+                    // Retrieve the existing player data from the database
+                    var existingPlayer = DB.Readers.leaderboard_entry(nick, db_path);
+
+                    if (existingPlayer != null)
+                    {
+                        // Increment the existing values with the new values
+                        existingPlayer.PoziomDoswiadczenia += pd;
+                        existingPlayer.Zwyciestwa += win;
+                        existingPlayer.CzasGry += gametime;
+
+                        // Update the player data in the database
+                        DB.Adder.Update(existingPlayer, db_path);
+                    }
+                    else
+                    {
+                        // If the player does not exist, create a new record
+                        var newPlayer = new PlayerData
+                        {
+                            Nick = nick,
+                            PoziomDoswiadczenia = pd,
+                            Zwyciestwa = win,
+                            CzasGry = gametime
+                        };
+
+                        DB.Adder.Add(newPlayer, db_path);
+                    }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        DB.Adder.Update(player, db_path);
-                    }
-                    catch (Exception ex)
-                    {
-                        return $"{ex}";
-                    }
+                    var newPlayer = new PlayerData
+                        {
+                            Nick = nick,
+                            PoziomDoswiadczenia = pd,
+                            Zwyciestwa = win,
+                            CzasGry = gametime
+                        };
+
+                        DB.Adder.Add(newPlayer, db_path);
+                    return $"Error: {ex.Message}";
                 }
-                return $"added to leaderboard {player.Nick}";
+
+                return $"Processed player {nick}";
             }
             else
             {

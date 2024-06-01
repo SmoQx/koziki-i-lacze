@@ -28,6 +28,13 @@ namespace DB
                 return JsonConvert.SerializeObject(scoreboardData);
             }
         }
+        public static PlayerData leaderboard_entry(string nick, string databasePath)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(databasePath))
+            {
+                return connection.Table<PlayerData>().FirstOrDefault(p => p.Nick == nick);
+            }
+        }
         public static string read_user_data(string databasePath)
         {
             List<object> player_stats = new List<object>();
