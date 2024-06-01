@@ -64,7 +64,7 @@ public class MessageHandler
                     Nickname = new_player_content["Nickname"]?.ToString() ?? "",
                     Level = 0,
                     ItemsList = "{\"Money\": 10}",
-                    HP = 10,
+                    HP = 100,
                     Mana = 10,
                     Skills = "{}",
                     Is_alive = true,
