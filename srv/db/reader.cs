@@ -21,8 +21,6 @@ namespace DB
                                             Nick = p.Nick,
                                             PoziomDoswiadczenia = p.PoziomDoswiadczenia,
                                             Zwyciestwa = p.Zwyciestwa,
-                                            Porazki = p.Porazki,
-                                            Ratio = p.Ratio,
                                             CzasGry = p.CzasGry
                                         };
                    

@@ -24,8 +24,6 @@ class Program
             Nick = "Sdas",
             PoziomDoswiadczenia = 50,
             Zwyciestwa = 100,
-            Porazki = 20,
-            Ratio = 5,
             CzasGry = "50h"
         };
 //

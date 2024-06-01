@@ -37,7 +37,7 @@ public class MessageHandler
                 DB.Find_user_and_passoword instance = new Find_user_and_passoword();
                 if (instance.finduser(DB.Hashing.ComputeSHA256Hash(user_name), DB.Hashing.ComputeSHA256Hash(password), db_path))
                 {
-                    return $"{Hashing.ComputeSHA256Hash(user_name)}";
+                    return $"{{\"Correct\":{Hashing.ComputeSHA256Hash(user_name)}}}";
                 }
                 else
                     return $"non valid";
@@ -122,8 +122,6 @@ public class MessageHandler
                     Nick = messageContent["Nick"]?.ToString() ?? "" ,
                     PoziomDoswiadczenia = int.TryParse(messageContent["PoziomDoswiadczenia"]?.ToString(), out int poziomDoswiadczenia) ? poziomDoswiadczenia : 0,
                     Zwyciestwa = int.TryParse(messageContent["Zwyciestwa"]?.ToString(), out int zwyciestwa) ? zwyciestwa : 0,
-                    Porazki = int.TryParse(messageContent["Porazki"]?.ToString(), out int porazki) ? porazki : 0,
-                    Ratio = float.TryParse(messageContent["Ratio"]?.ToString(), out float ratio) ? ratio : 0f,
                     CzasGry = messageContent["CzasGry"]?.ToString() ?? ""
                 };
                 
