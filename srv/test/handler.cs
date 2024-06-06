@@ -66,7 +66,7 @@ public class MessageHandler
                     ItemsList = "{\"Money\": 10}",
                     HP = 100,
                     Mana = 10,
-                    Skills = "{}",
+                    Skills = "{\"Speed\": 0, \"Jump\": 0,\"Strong\": 0}",
                     Is_alive = true,
                     UserName = DB.Hashing.ComputeSHA256Hash(new_player_content["UserName"]?.ToString() ?? "")
                 };
