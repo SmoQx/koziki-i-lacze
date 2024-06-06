@@ -1,4 +1,0 @@
-repository "GameProject2@Xveteran123@cloud"
-  path "/"
-    br "/main"
-    co "/main"
